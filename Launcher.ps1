@@ -42,12 +42,10 @@ $ListPath = "$ListPath\Services.txt"
 If ($start) {
 
     Get-Content $ListPath | Get-Service -Name {$_} | Where-Object {$_.status -eq 'stopped'} | Start-Service -pass
-    IISRESET /start
     
 }
 Else {
 
     Get-Content $ListPath | Get-Service -Name {$_} | Where-Object {$_.status -eq 'running'} | Stop-Service -pass
-    IISRESET /stop    
     
 }
