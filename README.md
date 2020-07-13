@@ -2,7 +2,7 @@
 
 Скрипт на PowerShell для пакетного запуска или остановки заранее определенных служб Microsoft Windows. 
 
-У меня на сайте есть [заметка](https://kostyanetsky.ru/notes/service-launcher/) про этот скрипт.
+На моём сайте про него есть [заметка](https://kostyanetsky.ru/notes/service-launcher/).
 
 ## Как пользоваться
 
