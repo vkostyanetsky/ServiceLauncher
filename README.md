@@ -2,8 +2,6 @@
 
 Скрипт на PowerShell для пакетного запуска или остановки заранее определенных служб Microsoft Windows. 
 
-На моём сайте про него есть [заметка](https://kostyanetsky.ru/notes/service-launcher/).
-
 ## Как пользоваться
 
 Введите в Services.txt список служб, которые нужно запускать или останавливать с помощью скрипта. По одной на строку. Можно использовать шаблоны, понятные командлету Get-Service (подробности — в [документации](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service?view=powershell-7) к языку).
