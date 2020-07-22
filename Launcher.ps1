@@ -11,9 +11,19 @@ function Test-Admin {
     
 }
 
+$listPath = Split-Path $script:MyInvocation.MyCommand.Path -Parent
+$listPath = "$listPath\Services.txt"
+
 If (($start) -eq $false -and ($stop) -eq $false) {
 
-    exit
+    $firstService = Get-Content -Path $listPath -TotalCount 1 | Get-Service -Name {$_}
+    
+    If (($firstService.status) -eq "stopped") {
+        $start = $true
+    }
+    Else {
+        $stop = $true
+    }
     
 }
 
@@ -36,16 +46,13 @@ If ((Test-Admin) -eq $false) {
     
 }
 
-$ListPath = Split-Path $script:MyInvocation.MyCommand.Path -Parent
-$ListPath = "$ListPath\Services.txt"
-
 If ($start) {
 
-    Get-Content $ListPath | Get-Service -Name {$_} | Where-Object {$_.status -eq 'stopped'} | Start-Service -pass
+    Get-Content $listPath | Get-Service -Name {$_} | Where-Object {$_.status -eq 'stopped'} | Start-Service -pass
     
 }
 Else {
 
-    Get-Content $ListPath | Get-Service -Name {$_} | Where-Object {$_.status -eq 'running'} | Stop-Service -pass
+    Get-Content $listPath | Get-Service -Name {$_} | Where-Object {$_.status -eq 'running'} | Stop-Service -pass
     
 }
