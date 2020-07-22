@@ -11,8 +11,12 @@ function Test-Admin {
     
 }
 
+# find the list of services
+
 $listPath = Split-Path $script:MyInvocation.MyCommand.Path -Parent
 $listPath = "$listPath\Services.txt"
+
+# decide what to do (no parameters given)
 
 If (($start) -eq $false -and ($stop) -eq $false) {
 
@@ -26,6 +30,8 @@ If (($start) -eq $false -and ($stop) -eq $false) {
     }
     
 }
+
+# check for privileges
 
 If ((Test-Admin) -eq $false) {
 
@@ -45,6 +51,8 @@ If ((Test-Admin) -eq $false) {
     exit
     
 }
+
+# to be, or not to be, that is the question
 
 If ($start) {
 
