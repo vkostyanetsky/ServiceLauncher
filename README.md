@@ -1,5 +1,7 @@
 # Запускатор служб
 
+ [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+
 Скрипт на PowerShell для пакетного запуска или остановки заранее определенных служб Microsoft Windows. 
 
 ## Как пользоваться
