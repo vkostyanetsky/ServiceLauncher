@@ -5,24 +5,12 @@ $firstService       = Get-Content -Path $listPath -TotalCount 1 | Get-Service -N
 $firstServiceName   = $firstService.DisplayName
 
 If (($firstService.status) -eq "stopped") {
-    $text = "$firstServiceName is currently down."
+    $text = "down."
 }
 Else {
-    $text = "$firstServiceName is currently up!"
+    $text = "up!"
 }
 
-Add-Type -AssemblyName System.Windows.Forms
+"$firstServiceName is currently $($text)`n"
 
-$global:balmsg = New-Object System.Windows.Forms.NotifyIcon
-
-$path = (Get-Process -id $pid).Path
-$balmsg.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path)
-
-$balmsg.BalloonTipTitle = "Service Launcher"
-
-$balmsg.BalloonTipText = $text
-$balmsg.BalloonTipIcon = [System.Windows.Forms.ToolTipIcon]::Info
-
-$balmsg.Visible = $true
-
-$balmsg.ShowBalloonTip(10000)
+pause
