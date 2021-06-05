@@ -13,4 +13,4 @@ Else {
 
 "$firstServiceName is currently $($text)`n"
 
-pause
+$host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') | Out-Null
