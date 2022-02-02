@@ -1,7 +1,8 @@
 Param (
     [switch]$elevated,
     [switch]$start,
-    [switch]$stop
+    [switch]$stop,
+    [string]$path
 )
 
 function Test-Admin {
@@ -11,16 +12,11 @@ function Test-Admin {
     
 }
 
-# find the list of services
-
-$listPath = Split-Path $script:MyInvocation.MyCommand.Path -Parent
-$listPath = "$listPath\Services.txt"
-
 # decide what to do (no parameters given)
 
 If (($start) -eq $false -and ($stop) -eq $false) {
 
-    $firstService = Get-Content -Path $listPath -TotalCount 1 | Get-Service -Name {$_}
+    $firstService = Get-Content -Path $path -TotalCount 1 | Get-Service -Name {$_}
     
     If (($firstService.status) -eq "stopped") {
         $start = $true
@@ -43,8 +39,9 @@ If ((Test-Admin) -eq $false) {
     Else {
     
         $action = $(If ($start) {"start"} Else {"stop"})
+        
             
-        Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -noexit -file "{0}" -elevated -{1}' -f ($myinvocation.MyCommand.Definition, $action))
+        Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -noexit -file "{0}" -elevated -{1} -path {2}' -f ($myinvocation.MyCommand.Definition, $action, $path))
         
     }
 
@@ -56,11 +53,11 @@ If ((Test-Admin) -eq $false) {
 
 If ($start) {
 
-    Get-Content $listPath | Get-Service -Name {$_} | Where-Object {$_.status -eq 'stopped'} | Start-Service -pass
+    Get-Content $path | Get-Service -Name {$_} | Where-Object {$_.status -eq 'stopped'} | Start-Service -pass
     
 }
 Else {
 
-    Get-Content $listPath | Get-Service -Name {$_} | Where-Object {$_.status -eq 'running'} | Stop-Service -pass
+    Get-Content $path | Get-Service -Name {$_} | Where-Object {$_.status -eq 'running'} | Stop-Service -pass
     
 }
