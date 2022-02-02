@@ -31,4 +31,4 @@ If ((Test-Admin) -eq $false) {
 
 # set manual mode for an each service given
 
-Get-Content $path | Get-Service -Name {$_} | Where-Object {$_.StartupType -ne 'Manual'} | Set-Service -StartupType Manual -PassThru
+Get-Content $path | Get-Service -Name {$_} | Where-Object {$_.StartupType -ne 'Manual'} | Set-Service -StartupType Manual
