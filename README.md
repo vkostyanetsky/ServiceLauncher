@@ -6,15 +6,15 @@
 
 ## Как пользоваться
 
-Введите в текстовой файл список служб, которые нужно запускать или останавливать с помощью скрипта. По одной на строку. Можно использовать шаблоны, понятные командлету Get-Service (подробности — в [документации](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service?view=powershell-7) к языку).
+Введите в текстовой файл список служб (см. [пример](Services.txt)), которые нужно запускать или останавливать с помощью скрипта. По одной на строку. Можно использовать шаблоны, понятные командлету Get-Service (подробности — в [документации](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service?view=powershell-7) к языку).
 
 Собственно, это всё. Вызовите Launcher.ps1 с параметром path (путь к текстовому файлу) и параметром start, чтобы запустить службы:
 
-`powershell .\Launcher.ps1 -start -path "D:\services.txt"`
+`powershell .\Launcher.ps1 -start -path "D:\Services.txt"`
 
 Используйте параметр stop, чтобы остановить их:
 
-`powershell .\Launcher.ps1 -stop -path "D:\services.txt"`
+`powershell .\Launcher.ps1 -stop -path "D:\Services.txt"`
 
 Если не указан ни параметр start, ни параметр stop — скрипт сам решит, запускать или останавливать службы. Для этого он определит статус первой службы в списке: если она работает — все службы из списка будут остановлены, если выключена — скрипт попытается их запустить.
 
